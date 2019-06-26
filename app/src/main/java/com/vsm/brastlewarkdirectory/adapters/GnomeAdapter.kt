@@ -4,11 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.vsm.brastlewarkdirectory.R
-import com.vsm.brastlewarkdirectory.services.ItemGnome
+import com.vsm.brastlewarkdirectory.sync.BrastlewarkItem
 
 /*
 * @author Vladimir Saldivar
@@ -17,11 +19,11 @@ import com.vsm.brastlewarkdirectory.services.ItemGnome
 
 class GnomeAdapter : RecyclerView.Adapter<GnomeAdapter.ViewHolder>() {
 
-    var superheros: List<ItemGnome> = ArrayList()
+    var superheros: List<BrastlewarkItem> = ArrayList()
     lateinit var context: Context
 
 
-    fun PopularAdapter(superheros: List<ItemGnome>, context: Context) {
+    fun PopularAdapter(superheros: List<BrastlewarkItem>, context: Context) {
         this.superheros = superheros
         this.context = context
     }
@@ -43,10 +45,12 @@ class GnomeAdapter : RecyclerView.Adapter<GnomeAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtViewPopularTittle = view.findViewById(R.id.txtViewNameGnome) as TextView
         val txtViewPopularSubTittle1 = view.findViewById(R.id.txtViewAgeGnome) as TextView
+        val imageViewGnome = view.findViewById(R.id.imageViewGnome) as ImageView
 
-        fun bind(superhero: ItemGnome, context: Context) {
+        fun bind(superhero: BrastlewarkItem, context: Context) {
+            Glide.with(context).load(superhero.thumbnail).into(imageViewGnome)
             txtViewPopularTittle.text = superhero.name
-            txtViewPopularSubTittle1.text = superhero.age
+            txtViewPopularSubTittle1.text = superhero.age.toString()
             //avatar.loadUrl(superhero.photo)
             itemView.setOnClickListener(View.OnClickListener {
                 Toast.makeText(

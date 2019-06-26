@@ -2,6 +2,7 @@ package com.vsm.brastlewarkdirectory.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.vsm.brastlewarkdirectory.R
 import com.vsm.brastlewarkdirectory.adapters.GnomeAdapter
-import com.vsm.brastlewarkdirectory.services.ItemGnome
+import com.vsm.brastlewarkdirectory.interfaces.DataInterface
+import com.vsm.brastlewarkdirectory.sync.BrastlewarkItem
+import com.vsm.brastlewarkdirectory.sync.GonomeResponse
+import com.vsm.brastlewarkdirectory.utils.retrofitInit
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     lateinit var mRecyclerView: RecyclerView
@@ -26,8 +33,8 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-        //inflo el recicler
-        setUpRecyclerView()
+        //realizo la peticion
+        makeRequest()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -47,10 +54,10 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun setUpRecyclerView() {
-        val itemsShows = (0..50).map {
+    fun setUpRecyclerView(itemsShows: List<BrastlewarkItem>) {
+        /*val itemsShows = (0..50).map {
             ItemGnome("Titulo: ${it}", "Subtitulo: $it")
-        }
+        }*/
         mRecyclerView = findViewById(R.id.rcViewGnomes) as RecyclerView
         mRecyclerView.setHasFixedSize(true)
         if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -61,4 +68,25 @@ class MainActivity : AppCompatActivity() {
         mAdapter.PopularAdapter(itemsShows, this)
         mRecyclerView.adapter = mAdapter
     }
+
+    fun makeRequest() {
+        val retrofit = retrofitInit()
+        val endpoint = retrofit.create(DataInterface::class.java)
+        val call = endpoint.getGnomes()
+        call.enqueue(object : Callback<GonomeResponse> {
+            override fun onResponse(call: Call<GonomeResponse>, response: Response<GonomeResponse>) {
+                if (response?.code() == 200) {
+                    Log.i("Respuesta: ", "${response.body().toString()}")
+                    setUpRecyclerView(response.body()?.brastlewark as List<BrastlewarkItem>)
+                }
+
+            }
+
+            override fun onFailure(call: Call<GonomeResponse>, t: Throwable) {
+            }
+
+
+        })
+    }
+
 }
