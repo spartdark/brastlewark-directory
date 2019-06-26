@@ -2,6 +2,7 @@ package com.vsm.brastlewarkdirectory.sync
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class BrastlewarkItem(
@@ -32,4 +33,4 @@ data class BrastlewarkItem(
 
     @field:SerializedName("hair_color")
     val hairColor: String? = null
-)
+) : Serializable

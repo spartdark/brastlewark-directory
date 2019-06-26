@@ -1,16 +1,17 @@
 package com.vsm.brastlewarkdirectory.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.vsm.brastlewarkdirectory.R
 import com.vsm.brastlewarkdirectory.sync.BrastlewarkItem
+import com.vsm.brastlewarkdirectory.ui.GnomesDetailActivity
 
 /*
 * @author Vladimir Saldivar
@@ -46,22 +47,17 @@ class GnomeAdapter : RecyclerView.Adapter<GnomeAdapter.ViewHolder>() {
         val txtViewPopularTittle = view.findViewById(R.id.txtViewNameGnome) as TextView
         val txtViewPopularSubTittle1 = view.findViewById(R.id.txtViewAgeGnome) as TextView
         val imageViewGnome = view.findViewById(R.id.imageViewGnome) as ImageView
+        val EXTRA_INTENTDATA = "brastlewarkitem"
 
         fun bind(superhero: BrastlewarkItem, context: Context) {
             Glide.with(context).load(superhero.thumbnail).into(imageViewGnome)
             txtViewPopularTittle.text = superhero.name
             txtViewPopularSubTittle1.text = superhero.age.toString()
-            //avatar.loadUrl(superhero.photo)
-            itemView.setOnClickListener(View.OnClickListener {
-                Toast.makeText(
-                    context,
-                    superhero.name,
-                    Toast.LENGTH_SHORT
-                ).show()
-            })
+            itemView.setOnClickListener {
+                val intent = Intent(context, GnomesDetailActivity::class.java)
+                intent.putExtra(EXTRA_INTENTDATA, superhero)
+                context.startActivity(intent)
+            }
         }
-        /*fun ImageView.loadUrl(url: String) {
-            Picasso.with(context).load(url).into(this)
-        }*/
     }
 }

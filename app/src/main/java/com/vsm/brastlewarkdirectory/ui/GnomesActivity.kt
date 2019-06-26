@@ -20,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
+class GnomesActivity : AppCompatActivity() {
     lateinit var mRecyclerView: RecyclerView
     val mAdapter: GnomeAdapter = GnomeAdapter()
 

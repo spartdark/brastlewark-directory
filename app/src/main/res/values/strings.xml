@@ -2,4 +2,7 @@
     <string name="app_name">Brastlewark Directory</string>
     <string name="action_settings">Settings</string>
     <string name="tittle_toolbar_main">Gnomes</string>
+    <string name="title_activity_gnomes_detail">Gnome Detail</string>
+    <!--Gnomes detail-->
+    <string name="textview_age">Edad:</string>
 </resources>
