@@ -2,9 +2,9 @@ package com.vsm.brastlewarkdirectory.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +30,7 @@ class GnomesActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.tittle_toolbar_main)
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, R.string.fb_action_filter_gnomes, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
         //realizo la peticion
@@ -53,11 +53,9 @@ class GnomesActivity : AppCompatActivity() {
         }
     }
 
-
+    //metodo para crear e inflar el recliclerView
     fun setUpRecyclerView(itemsShows: List<BrastlewarkItem>) {
-        /*val itemsShows = (0..50).map {
-            ItemGnome("Titulo: ${it}", "Subtitulo: $it")
-        }*/
+        progressBarMain.visibility = View.GONE
         mRecyclerView = findViewById(R.id.rcViewGnomes) as RecyclerView
         mRecyclerView.setHasFixedSize(true)
         if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -69,23 +67,27 @@ class GnomesActivity : AppCompatActivity() {
         mRecyclerView.adapter = mAdapter
     }
 
+    //metodo para hacer la peticion http y obtener el json
     fun makeRequest() {
+        progressBarMain.visibility = View.VISIBLE
         val retrofit = retrofitInit()
         val endpoint = retrofit.create(DataInterface::class.java)
         val call = endpoint.getGnomes()
         call.enqueue(object : Callback<GonomeResponse> {
             override fun onResponse(call: Call<GonomeResponse>, response: Response<GonomeResponse>) {
                 if (response?.code() == 200) {
-                    Log.i("Respuesta: ", "${response.body().toString()}")
                     setUpRecyclerView(response.body()?.brastlewark as List<BrastlewarkItem>)
                 }
-
             }
 
             override fun onFailure(call: Call<GonomeResponse>, t: Throwable) {
+                progressBarMain.visibility = View.GONE
+                Snackbar.make(
+                    coordinatorMain,
+                    R.string.error_there_was_an_error_please_retry_later,
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
-
-
         })
     }
 

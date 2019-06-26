@@ -11,18 +11,21 @@
 
     <ImageView
             android:layout_width="0dp"
-            android:layout_height="200dp" app:srcCompat="@drawable/ic_baseline_image_24px"
-            android:id="@+id/imageView"
-            android:scaleType="centerCrop"
+            android:layout_height="200dp"
+            app:srcCompat="@drawable/ic_baseline_image_24px"
+            android:id="@+id/imageViewGnomeDetail"
+            android:scaleType="centerInside"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent"/>
     <ScrollView
-            android:layout_width="395dp"
-            android:layout_height="443dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp" android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp">
+            android:layout_width="0dp"
+            android:layout_height="0dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewGnomeDetail"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp">
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:orientation="vertical">
@@ -31,17 +34,134 @@
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
                 <TextView
                         android:text="@string/textview_age"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/textView"/>
+                        android:textColor="@color/colorPrimaryText"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
                 <TextView
-                        tools:text="27"
+                        tools:text="27 años"
                         android:layout_marginLeft="2dp"
+                        android:textColor="@color/colorSecondaryText"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/textView2" android:layout_weight="1"/>
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textAge" android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
             </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
+                <TextView
+                        android:text="@string/textview_weight"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorPrimaryText"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+                <TextView
+                        tools:text="39.065952"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="@color/colorSecondaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textWeight"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
+                <TextView
+                        android:text="@string/textview_height"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorPrimaryText"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+                <TextView
+                        tools:text="107.75835"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="@color/colorSecondaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textHeight" android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
+                <TextView
+                        android:text="@string/textview_hair_color"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorPrimaryText"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+                <TextView
+                        tools:text="Pink"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="@color/colorSecondaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textHairColor" android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
+                <TextView
+                        android:text="@string/textview_professions"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/textview_professions"
+                        android:textColor="@color/colorPrimaryText"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+                <TextView
+                        tools:text="Metalworker"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="@color/colorSecondaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textProfessions"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
+                <TextView
+                        android:text="@string/textview_friends"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorPrimaryText"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+                <TextView
+                        tools:text="Cogwitz"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="@color/colorSecondaryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textFriends"
+                        android:layout_weight="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+            </LinearLayout>
+
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

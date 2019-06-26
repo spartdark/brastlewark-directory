@@ -44,15 +44,16 @@ class GnomeAdapter : RecyclerView.Adapter<GnomeAdapter.ViewHolder>() {
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        //inflo los elementos graficos
         val txtViewPopularTittle = view.findViewById(R.id.txtViewNameGnome) as TextView
         val txtViewPopularSubTittle1 = view.findViewById(R.id.txtViewAgeGnome) as TextView
         val imageViewGnome = view.findViewById(R.id.imageViewGnome) as ImageView
         val EXTRA_INTENTDATA = "brastlewarkitem"
-
+        //muestro los detalles del cardview
         fun bind(superhero: BrastlewarkItem, context: Context) {
             Glide.with(context).load(superhero.thumbnail).into(imageViewGnome)
             txtViewPopularTittle.text = superhero.name
-            txtViewPopularSubTittle1.text = superhero.age.toString()
+            txtViewPopularSubTittle1.text = "${superhero.age.toString()} años"
             itemView.setOnClickListener {
                 val intent = Intent(context, GnomesDetailActivity::class.java)
                 intent.putExtra(EXTRA_INTENTDATA, superhero)
