@@ -1,4 +1,4 @@
-# brastlewark-directory
+# Brastlewark Directory
 
 ## Bibliotecas usadas:
 
